@@ -8,7 +8,7 @@ export default {
 	// data!   funtion() {return { movies[]}}  화살표함수
 	state: ()=> ({
 		movies:[],
-		message:'',
+		message:'Seach for the movie title!',
 		loading:false
 	}),
 
@@ -42,6 +42,14 @@ export default {
 	//context, payload 이름은 아무거나 해도 무방함 
 	actions:{
 		async searchMovies({state,commit}, payload){
+			if(state.loading){
+				return
+			}
+
+			commit('updateState',{
+				message:'',
+				loading:true
+			})
 			// context.state
 			// context.getters
 			// context.commit
@@ -86,6 +94,10 @@ export default {
 				commit('updateState',{
 					movies:[],
 					message
+				})
+			} finally{
+				commit('updateState',{
+					loading:false
 				})
 			}
      
