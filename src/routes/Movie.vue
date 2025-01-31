@@ -21,8 +21,12 @@
       v-else 
       class="movie-details">
       <div 
-        :style="{backgroundImage:`url(${theMovie.Poster})`}" 
-        class="poster"></div>
+        :style="{backgroundImage:`url(${requestDiffSizeImage(theMovie.Poster)})`}" 
+        class="poster">
+        <Loader 
+          v-if="imageLoading"
+          absolute />
+      </div>
       <div class="specs">
         <div class="title">
           {{ theMovie.Title }}
@@ -37,6 +41,18 @@
         </div>
         <div class="ratings">
           <h3>Ratings</h3>
+          <div class="rating-wrap">
+            <div
+              v-for="{Source:name, Value:score } in theMovie.Ratings"
+              :key="name"
+              :title="name"
+              class="rating">
+              <img 
+                :src="`https://raw.githubusercontent.com/ParkYoungWoong/vue3-movie-app/refs/heads/master/src/assets/${name}.png`"
+                :alt="name" />
+              <span>{{ score }}</span>
+            </div>
+          </div>
         </div>
         <div>
           <h3>Actors</h3>
@@ -66,6 +82,11 @@ export default {
   components:{
     Loader
   },
+  data() {
+    return {
+      imageLoading: true
+    }
+  },
 
   computed:{
     theMovie(){
@@ -81,8 +102,21 @@ export default {
     this.$store.dispatch('movie/searchMovieWithId',{
       id: this.$route.params.id
     })
+  },
+  methods:{
+    requestDiffSizeImage(url, size = 700){
+      if(!url || url==='N/A'){
+        this.imageLoading = 'false'
+        return ''
+      } 
+      const src = url.replace('SX300',`SX${size}`)
+      this.$loadImage(src)
+        .then(() => {
+          this.imageLoading = false
+        })
+      return src      
+    }
   }
-    
 }
 </script>
 
@@ -130,6 +164,7 @@ export default {
   display: flex;
   color:$gray-600;
   .poster {
+    flex-shrink:0;
     width:500px;
     height:500px * 3 / 2;
     margin-right: 70px;
@@ -137,7 +172,7 @@ export default {
     background-color:$gray-200;
     background-size:cover;
     background-position:center;
-    flex-shrink:0;
+    position:relative;
   }
   .specs {
     flex-grow:1;
@@ -164,7 +199,19 @@ export default {
       margin-top:20px;
     }
     .ratings {
-
+      .rating-wrap{
+        display:flex;
+        .rating{
+          display:flex;
+          align-items:center;
+          margin-right:32px;
+          img{
+            height:30px;
+            flex-shrink:0;  //감소넚이 없음으로 축소되지 않게함
+            margin-right:6px;
+          }
+        }
+      }
     }
     h3 {
       margin:24px 0 6px;
