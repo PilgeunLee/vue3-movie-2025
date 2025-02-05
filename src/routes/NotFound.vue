@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~/scss/main";
+//@import "~/scss/main";
 
 .not-found {
 	line-height: 1.2;
