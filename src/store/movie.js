@@ -1,5 +1,7 @@
 import axios from 'axios'
 import _uniqBy from 'lodash/uniqBy'
+//_ 표시는 해당페이지에서 사용 
+const _defaultMessage='Seach for the movie title!'
 
 export default {
 	// module!
@@ -8,7 +10,7 @@ export default {
 	// data!   funtion() {return { movies[]}}  화살표함수
 	state: ()=> ({
 		movies:[],
-		message:'Seach for the movie title!',
+		message: _defaultMessage,
 		loading:false,
 		theMovie:{}
 	}),
@@ -36,6 +38,8 @@ export default {
 		},
 		resetMovies(state){
 			state.moives=[]
+			state.message= _defaultMessage
+			state.loading=false
 		}
 	},
 

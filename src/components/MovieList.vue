@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import{mapState} from 'veux'
 import MovieItem from '~/components/MovieItem'
 import Loader from '~/components/Loader'
 
@@ -35,16 +36,21 @@ export default {
   //     movies:[]
   //   }
   // }
-  computed:{
-    movies(){
-      return this.$store.state.movie.movies
-    },
-    message(){
-      return this.$store.state.movie.message
-    },
-    loading(){
-      return this.$store.state.movie.loading
-    }
+  computed:{ 
+    ...mapState('movie',[
+      'movies',
+      'message',
+      'loading'
+    ])
+    // movies(){
+    //   return this.$store.state.movie.movies
+    // },
+    // message(){
+    //   return this.$store.state.movie.message
+    // },
+    // loading(){
+    //   return this.$store.state.movie.loading
+    // }
   }
 
 }

@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import Loader from '~/components/Loader'
 export default {
   components:{
@@ -27,19 +28,25 @@ export default {
       imageLoading: true
     }
   },
-  computed:{          //계산된 데이터
-    image () {
-      return this.$store.state.about.image
-    },
-    name () {
-      return this.$store.state.about.name
-    },
-    email () {
-      return this.$store.state.about.email
-    },
-    phone () {
-      return this.$store.state.about.phone
-    },
+  computed:{    
+    ...mapState('about',[
+      'image',
+      'name',
+      'email',
+      'phone'
+    ])      //계산된 데이터
+    // image () {
+    //   return this.$store.state.about.image
+    // },
+    // name () {
+    //   return this.$store.state.about.name
+    // },
+    // email () {
+    //   return this.$store.state.about.email
+    // },
+    // phone () {
+    //   return this.$store.state.about.phone
+    // },
   },
   mounted(){
     this.init()
