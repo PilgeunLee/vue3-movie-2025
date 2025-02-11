@@ -9,8 +9,8 @@ export default createRouter({
     //https://google.com/#/search
     history: createWebHashHistory(),
     
-    scrollBehavior(){
-        return {top: 0 }
+    scrollBehavior() {
+        return { top: 0 }
     },
     //page
     //https://google.com/about

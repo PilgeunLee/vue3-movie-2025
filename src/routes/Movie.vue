@@ -77,7 +77,7 @@
 
 <script>
 import Loader from '~/components/Loader'
-import {mapState} from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   components:{

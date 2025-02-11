@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import { mapState } from 'vuex'
 import Logo from '~/components/Logo'
 export default {
   components : {

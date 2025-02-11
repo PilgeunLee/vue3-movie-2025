@@ -29,12 +29,13 @@ export default {
     }
   },
   computed:{    
-    ...mapState('about',[
+    ...mapState('about', [
       'image',
       'name',
       'email',
       'phone'
-    ])      //계산된 데이터
+    ])      
+    //계산된 데이터
     // image () {
     //   return this.$store.state.about.image
     // },

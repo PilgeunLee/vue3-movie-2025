@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import{mapState} from 'veux'
+import{ mapState } from 'vuex'
 import MovieItem from '~/components/MovieItem'
 import Loader from '~/components/Loader'
 
